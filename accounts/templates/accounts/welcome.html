@@ -1,7 +1,43 @@
-<h1>Welcome, {{ user.username }}!</h1>
-<p>Your assigned role is: {{ user.profile.role }}</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .btn { padding: 10px 20px; margin: 5px; text-decoration: none; border-radius: 5px; display: inline-block; }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .role-badge { padding: 4px 8px; border-radius: 3px; color: white; font-size: 14px; }
+        .role-admin { background: #dc3545; }
+        .role-student { background: #28a745; }
+        .admin-section { background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}!</h1>
+    <p>Your assigned role is: 
+        <span class="role-badge role-{{ user.profile.role }}">
+            {{ user.profile.get_role_display }}
+        </span>
+    </p>
 
-<p><a href="{% url 'password_change' %}">Change my password</a></p> <form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-</form>
+    {% if user.profile.role == 'admin' %}
+    <div class="admin-section">
+        <h3>Admin Controls</h3>
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-primary">Admin Dashboard</a>
+        <a href="{% url 'create_user' %}" class="btn btn-success">Create New User</a>
+        <a href="{% url 'list_users' %}" class="btn btn-primary">Manage Users</a>
+    </div>
+    {% endif %}
+
+    <div style="margin-top: 30px;">
+        <a href="{% url 'password_change' %}" class="btn btn-primary">Change Password</a>
+        
+        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+</body>
+</html>

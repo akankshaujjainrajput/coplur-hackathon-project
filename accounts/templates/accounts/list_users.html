@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Users</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .btn { padding: 5px 10px; margin: 2px; text-decoration: none; border-radius: 3px; display: inline-block; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-primary { background: #007bff; color: white; }
+        .navbar { background: #343a40; padding: 10px; margin-bottom: 20px; }
+        .navbar a { color: white; text-decoration: none; margin-right: 15px; }
+        .role-badge { padding: 4px 8px; border-radius: 3px; color: white; font-size: 12px; }
+        .role-admin { background: #dc3545; }
+        .role-student { background: #28a745; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+        <a href="{% url 'create_user' %}">Create User</a>
+        <a href="{% url 'welcome' %}">Welcome</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+    <h1>All Users</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <p>Total users: <strong>{{ users.count }}</strong></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Date Joined</th>
+                <th>Last Login</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ user.email|default:"Not provided" }}</td>
+                <td>
+                    <span class="role-badge role-{{ user.profile.role }}">
+                        {{ user.profile.get_role_display }}
+                    </span>
+                </td>
+                <td>{{ user.date_joined|date:"M d, Y" }}</td>
+                <td>{{ user.last_login|date:"M d, Y H:i"|default:"Never" }}</td>
+                <td>
+                    {% if user != request.user %}
+                        <a href="{% url 'delete_user' user.id %}" class="btn btn-danger" 
+                           onclick="return confirm('Are you sure you want to delete {{ user.username }}?')">
+                            Delete
+                        </a>
+                    {% else %}
+                        <span style="color: #6c757d;">Current User</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No users found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
+</body>
+</html>
