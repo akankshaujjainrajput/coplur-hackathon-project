@@ -26,6 +26,3 @@ A Django web application that supports user authentication, role-based access co
 ## Admin Credentials
 - **Username:** admin
 - **Password:** YourSecureAdminPassword123 (The one you set in Step 3)
-
-## Team Member Contributions
-- **[Your Name]:** Completed all backend and frontend development, project setup, and documentation.
