@@ -111,6 +111,3 @@ A Django web application that supports user authentication, role-based access co
 - All features have been validated for edge cases and security.
 - The codebase is original, well-commented, and follows good commit practices.
 
-## License
-
-MIT
