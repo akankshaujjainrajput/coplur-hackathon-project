@@ -1,24 +1,12 @@
-"""
-URL configuration for coplur_challenge project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-# In coplur_challenge/urls.py
 from django.contrib import admin
 from django.urls import path, include # Make sure 'include' is imported
+from django.shortcuts import redirect
+
+def home_redirect(request):
+    return redirect('login')
 
 urlpatterns = [
+    path('', home_redirect, name='home'), 
     path('admin/', admin.site.urls),
-    path('accounts/', include('accounts.urls')), # This line tells our project to look at the new urls.py
+    path('accounts/', include('accounts.urls')),
 ]
