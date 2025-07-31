@@ -1,0 +1,7 @@
+<h1>Welcome, {{ user.username }}!</h1>
+<p>Your assigned role is: {{ user.profile.role }}</p>
+
+<p><a href="{% url 'password_change' %}">Change my password</a></p> <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>

@@ -14,9 +14,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# In coplur_challenge/urls.py
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include # Make sure 'include' is imported
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')), # This line tells our project to look at the new urls.py
 ]
