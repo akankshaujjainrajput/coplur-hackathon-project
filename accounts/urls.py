@@ -3,8 +3,8 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    # Authentication URLs
-    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    # Authentication URLs with enhanced forms
+    path('login/', views.EnhancedLoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
     path('register/', views.register_student, name='register'),
     path('welcome/', views.welcome_page, name='welcome'),
@@ -20,3 +20,8 @@ urlpatterns = [
     # Legacy admin page (redirects to dashboard)
     path('admin_page/', views.admin_page, name='admin_page'),
 ]
+
+# Custom error handlers
+handler403 = 'accounts.views.handle_403'
+handler404 = 'accounts.views.handle_404'
+handler500 = 'accounts.views.handle_500'
