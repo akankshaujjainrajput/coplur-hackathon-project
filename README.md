@@ -70,11 +70,7 @@ A Django web application that supports user authentication, role-based access co
 ## Admin Credentials
 
 - **Username:** admin
-- **Password:** ass230730 (default, change after first login!)
-
-## Screenshots
-
-*(Add screenshots of login, registration, admin dashboard, user management, error pages here for bonus points)*
+- **Password:** [Password you set in step 3] 
 
 ## API & Routing Overview
 
