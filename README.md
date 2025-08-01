@@ -98,8 +98,7 @@ A Django web application that supports user authentication, role-based access co
 
 - **Shivansh7102003:** Backend (authentication, admin management, validation), frontend templates, documentation
 - **Akanksha:** Frontend UI design, testing, project board management, code review
-- **[Add other teammates here and their contributions]**
-
+- **Suresh Sharma** Implemented streamlit
 ## Project Board / Task Breakdown
 
 - See GitHub Projects tab or Trello board for breakdown and progress.
